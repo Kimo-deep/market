@@ -14,105 +14,82 @@
 
         body {
             margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #f8fafc; overflow-x: hidden;
+            background-color: #f8fafc; overflow-x: hidden; [cite: 1]
         }
 
-/* الحاوية */
-#loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 9999;
-    display: flex;
-    pointer-events: none;
-}
+        /* الحاوية */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: 9999; display: flex; pointer-events: none; [cite: 2, 3]
+        }
 
-.curtain {
-    width: 50%;
-    height: 100%;
-    background: var(--primary);
-    position: absolute;
-    top: 0;
-    /* حركة انسيابية جداً */
-    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-    will-change: transform;
-}
+        .curtain {
+            width: 50%; height: 100%; background: var(--primary); position: absolute; top: 0;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1); will-change: transform; [cite: 3, 4]
+        }
 
-/* الستارة اليسرى: تثبت في أقصى اليسار وتصغر باتجاهه */
-.left {
-    left: 0;
-    transform-origin: left;
-}
+        .left { left: 0; transform-origin: left; [cite: 5] }
+        .right { right: 0; transform-origin: right; [cite: 6] }
+        #loader.active .left { transform: scaleX(0); [cite: 7] }
+        #loader.active .right { transform: scaleX(0); [cite: 8] }
+        #loader.gone { display: none !important; [cite: 8, 9] }
 
-/* الستارة اليمنى: تثبت في أقصى اليمين وتصغر باتجاهه */
-.right {
-    right: 0;
-    transform-origin: right;
-}
-
-/* حالة الفتح: "تقليص" الحجم باتجاه الأطراف */
-#loader.active .left {
-    transform: scaleX(0);
-}
-
-#loader.active .right {
-    transform: scaleX(0);
-}
-
-/* الإخفاء النهائي */
-#loader.gone {
-    display: none !important;
-}
-
-        /* باقي التصميم */
         nav { 
-            background: var(--primary); padding: 15px; 
-            position: sticky; top: 0; z-index: 1000; 
-            display: flex; justify-content: center; gap: 15px;
+            background: var(--primary); padding: 15px; position: sticky; top: 0; 
+            z-index: 1000; display: flex; justify-content: center; gap: 15px; [cite: 9, 10]
         }
+
         .filter-btn {
             background: transparent; border: 1px solid rgba(255,255,255,0.3);
             color: white; padding: 8px 20px; border-radius: 20px;
-            cursor: pointer; font-weight: bold; transition: 0.3s;
+            cursor: pointer; font-weight: bold; transition: 0.3s; [cite: 11, 12]
         }
+
         .filter-btn.active, .filter-btn:hover {
-            background: var(--accent); border-color: var(--accent);
+            background: var(--accent); border-color: var(--accent); [cite: 13]
         }
 
         #cart-panel {
             position: fixed; top: 0; left: -360px; width: 320px; height: 100%;
             background: white; z-index: 2000; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
             box-shadow: 10px 0 40px rgba(0,0,0,0.2); padding: 25px;
-            display: flex; flex-direction: column;
+            display: flex; flex-direction: column; [cite: 14, 15]
         }
-        #cart-panel.open { left: 0; }
+
+        #cart-panel.open { left: 0; [cite: 16] }
 
         .close-cart-btn {
             background: #f1f5f9; border: none; padding: 10px;
             border-radius: 10px; cursor: pointer; margin-bottom: 20px;
-            font-weight: bold; color: var(--primary); width: 100%;
+            font-weight: bold; color: var(--primary); width: 100%; [cite: 16, 17]
         }
 
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; [cite: 18] }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            gap: 25px; [cite: 18, 19] 
+        }
 
-        .shop-section { transition: opacity 0.5s ease; margin-bottom: 40px; }
-        .shop-section.hidden { display: none !important; }
+        .shop-section { transition: opacity 0.5s ease; margin-bottom: 40px; [cite: 19] }
+        .shop-section.hidden { display: none !important; [cite: 20] }
 
         .card {
             background: white; border-radius: 20px; padding: 20px;
             text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: 0.4s; position: relative; border: 1px solid #eee;
+            transition: 0.4s; position: relative; border: 1px solid #eee; [cite: 21, 22]
         }
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
-        .card img { width: 100%; height: 160px; object-fit: contain; }
 
-        .price { color: var(--success); font-size: 1.5rem; font-weight: bold; margin: 15px 0; }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); [cite: 23] }
+        .card img { width: 100%; height: 160px; object-fit: contain; [cite: 23, 24] }
+
+        .price { color: var(--success); font-size: 1.5rem; font-weight: bold; margin: 15px 0; [cite: 25] }
+        
         .add-btn {
             background: var(--primary); color: white; border: none;
-            padding: 12px; width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold;
+            padding: 12px; width: 100%; border-radius: 10px; 
+            cursor: pointer; font-weight: bold; [cite: 26, 27]
         }
 
         .cart-toggle {
@@ -120,10 +97,34 @@
             background: var(--accent); color: white; border: none;
             width: 65px; height: 65px; border-radius: 50%;
             cursor: pointer; z-index: 1500; font-size: 24px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); [cite: 27, 28, 29]
         }
 
-        footer { background: var(--primary); color: white; padding: 40px; text-align: center; margin-top: 50px; }
+        footer { background: var(--primary); color: white; padding: 40px; text-align: center; margin-top: 50px; [cite: 30] }
+
+        /* --- تعديلات الجوال لتحسين العرض والمحافظة على العناصر بجانب بعضها --- */
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr); /* عرض عنصرين في كل صف [cite: 49, 50] */
+                gap: 12px; /* تقليل الفجوات لتوفير مساحة [cite: 52] */
+            }
+
+            .container { padding: 0 10px; [cite: 52] }
+            
+            .card { padding: 10px; [cite: 52] }
+
+            .card img { height: 120px; [cite: 51] }
+
+            .card h3 { font-size: 0.95rem; [cite: 51] }
+
+            .price { font-size: 1.1rem; [cite: 51] }
+
+            .add-btn { padding: 8px; font-size: 13px; [cite: 51] }
+
+            nav { gap: 8px; padding: 10px; }
+
+            .filter-btn { padding: 6px 12px; font-size: 13px; }
+        }
     </style>
 </head>
 <body>
@@ -145,7 +146,7 @@
         </div>
     </div>
 
-    <button class="cart-toggle" onclick="toggleCart()">🛒 <span id="badge" style="font-size:12px; background:white; color:red; padding:2px 5px; border-radius:50%; vertical-align:top;">0</span></button>
+    <button class="cart-toggle" onclick="toggleCart()">🛒 <span id="badge" style="font-size:12px; background:white; color:red; padding:2px 5px; border-radius:50%; vertical-align:top;">0</span></button> [cite: 31]
 
     <nav>
         <button class="filter-btn active" onclick="filterCategory('all', this)">الكل</button>
@@ -161,7 +162,7 @@
                 <div class="card">
                     <img src="https://m.media-amazon.com/images/I/81vJyb43URL._SL1500_.jpg">
                     <h3>ليز عائلي ملح</h3>
-                    <div class="price">8 شيكل </div>
+                    <div class="price">8 شيكل</div>
                     <button class="add-btn" onclick="addToCart('ليز ملح', 8)">إضافة للسلة</button>
                 </div>
                 <div class="card">
@@ -184,12 +185,13 @@
                 </div>
             </div>
         </section>
+
         <section id="clean-section" class="shop-section" data-category="clean">
             <h2 style="border-right: 5px solid var(--accent); padding-right: 15px;">المنظفات</h2>
             <div class="grid">
                 <div class="card">
                     <img src="https://m.media-amazon.com/images/I/61EUyReZ5tL._SX466_.jpg">
-                    <h3>شامبو </h3>
+                    <h3>شامبو</h3>
                     <div class="price">20 شيكل</div>
                     <button class="add-btn" onclick="addToCart('شامبو', 20)">إضافة للسلة</button>
                 </div>
@@ -200,77 +202,68 @@
     <footer>
         <p> © 2026 AbdulKarim Anan Farajallah</p>
     </footer>
-      
 
-       <script>
-   window.addEventListener('load', () => {
-        const loader = document.getElementById('loader');
-        
-        // تأخير بسيط ليرى المستخدم الستارة وهي مغلقة للحظة
-        setTimeout(() => {
-            loader.classList.add('active');
-            
-            // حذف العنصر تماماً بعد انتهاء الأنميشن
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
             setTimeout(() => {
-                loader.classList.add('gone');
-            }, 1300);
-        }, 300);
-    });
-
-    // باقي دوال الفلترة والسلة (كما هي في كودك السابق)
-    function filterCategory(cat, btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const sections = document.querySelectorAll('.shop-section');
-        sections.forEach(sec => {
-            if (cat === 'all' || sec.getAttribute('data-category') === cat) {
-                sec.classList.remove('hidden');
-            } else {
-                sec.classList.add('hidden');
-            }
+                loader.classList.add('active');
+                setTimeout(() => { loader.classList.add('gone'); }, 1300);
+            }, 300);
         });
-    }
-    // ... وبقية الدوال
+
+        function filterCategory(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); [cite: 32]
+            btn.classList.add('active'); [cite: 33]
+            const sections = document.querySelectorAll('.shop-section');
+            sections.forEach(sec => {
+                if (cat === 'all' || sec.getAttribute('data-category') === cat) {
+                    sec.classList.remove('hidden'); [cite: 33]
+                } else {
+                    sec.classList.add('hidden'); [cite: 33]
+                }
+            });
+        }
 
         function toggleCart() {
-            document.getElementById('cart-panel').classList.toggle('open');
+            document.getElementById('cart-panel').classList.toggle('open'); [cite: 35]
         }
 
         let cart = [];
         function addToCart(name, price) {
-            cart.push({name, price});
+            cart.push({name, price}); [cite: 36]
             render();
             const btn = event.target;
             const originalText = btn.innerText;
-            btn.innerText = "✅ تمت الإضافة";
-            setTimeout(() => btn.innerText = originalText, 700);
+            btn.innerText = "✅ تمت الإضافة"; [cite: 36, 37]
+            setTimeout(() => btn.innerText = originalText, 700); [cite: 37]
         }
 
         function render() {
             const list = document.getElementById('cart-list');
             let total = 0;
-            list.innerHTML = '';
+            list.innerHTML = ''; [cite: 38]
             cart.forEach((item, index) => {
-                total += item.price;
+                total += item.price; [cite: 39]
                 list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; background:#f9f9f9; padding:10px; border-radius:8px;">
                     <span>${item.name}</span>
                     <span>${item.price} شيكل <button onclick="remove(${index})" style="color:red; border:none; background:none; cursor:pointer;">✕</button></span>
-                </div>`;
+                </div>`; [cite: 39]
             });
-            document.getElementById('total-val').innerText = total;
-            document.getElementById('badge').innerText = cart.length;
+            document.getElementById('total-val').innerText = total; [cite: 40]
+            document.getElementById('badge').innerText = cart.length; [cite: 40]
         }
 
-        function remove(i) { cart.splice(i, 1); render(); }
+        function remove(i) { cart.splice(i, 1); render(); [cite: 41] }
 
         function sendWhatsApp() {
-            const n = document.getElementById('uname').value;
-            const a = document.getElementById('uaddr').value;
-            if(!n || !a || cart.length === 0) { alert("أكمل البيانات والسلة أولاً!"); return; }
-            let msg = `*طلب جديد*\n👤 الاسم: ${n}\n📍 العنوان: ${a}\n----------\n`;
-            cart.forEach((it, i) => msg += `${i+1}. ${it.name} (${it.price} شيكل)\n`);
-            msg += `----------\n💰 الإجمالي: ${document.getElementById('total-val').innerText} شيكل`;
-            window.open(`https://wa.me/970567113558?text=${encodeURIComponent(msg)}`);
+            const n = document.getElementById('uname').value; [cite: 41]
+            const a = document.getElementById('uaddr').value; [cite: 42]
+            if(!n || !a || cart.length === 0) { alert("أكمل البيانات والسلة أولاً!"); return; [cite: 42] }
+            let msg = `*طلب جديد*\n👤 الاسم: ${n}\n📍 العنوان: ${a}\n----------\n`; [cite: 43]
+            cart.forEach((it, i) => msg += `${i+1}. ${it.name} (${it.price} شيكل)\n`); [cite: 44]
+            msg += `----------\n💰 الإجمالي: ${document.getElementById('total-val').innerText} شيكل`; [cite: 44]
+            window.open(`https://wa.me/970567113558?text=${encodeURIComponent(msg)}`); [cite: 44]
         }
     </script>
 </body>
