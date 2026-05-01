@@ -140,7 +140,7 @@
         <input type="text" id="uaddr" placeholder="العنوان" style="width:100%; padding:10px; margin-bottom:20px; border-radius:8px; border:1px solid #ddd;">
         <div id="cart-list" style="flex-grow:1; overflow-y:auto; border-top:1px solid #eee; padding-top:10px;"></div>
         <div style="border-top:2px solid #eee; padding-top:15px;">
-            <h4>الإجمالي: <span id="total-val">0</span> ريال</h4>
+            <h4>الإجمالي: <span id="total-val">0</span> شيكل</h4>
             <button onclick="sendWhatsApp()" style="width:100%; background:var(--success); color:white; border:none; padding:15px; border-radius:10px; cursor:pointer; font-weight:bold;">تأكيد عبر واتساب</button>
         </div>
     </div>
@@ -161,13 +161,13 @@
                 <div class="card">
                     <img src="https://m.media-amazon.com/images/I/81vJyb43URL._SL1500_.jpg">
                     <h3>ليز عائلي ملح</h3>
-                    <div class="price">8 ريال</div>
+                    <div class="price">8 شيكل </div>
                     <button class="add-btn" onclick="addToCart('ليز ملح', 8)">إضافة للسلة</button>
                 </div>
                 <div class="card">
                     <img src="https://m.media-amazon.com/images/I/91ubwvGeIpL._SX679_.jpg">
                     <h3>دوريتوس</h3>
-                    <div class="price">5 ريال</div>
+                    <div class="price">5 شيكل</div>
                     <button class="add-btn" onclick="addToCart('دوريتوس', 5)">إضافة للسلة</button>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                 <div class="card">
                     <img src="https://m.media-amazon.com/images/I/71DYwxxcGIL._SX679_PIbundle-12,TopRight,0,0_AA679SH20_.jpg">
                     <h3>كوكاكولا</h3>
-                    <div class="price">3 ريال</div>
+                    <div class="price">3 شيكل</div>
                     <button class="add-btn" onclick="addToCart('كوكاكولا', 3)">إضافة للسلة</button>
                 </div>
             </div>
@@ -190,7 +190,7 @@
                 <div class="card">
                     <img src="https://m.media-amazon.com/images/I/61EUyReZ5tL._SX466_.jpg">
                     <h3>شامبو </h3>
-                    <div class="price">20 ريال</div>
+                    <div class="price">20 شيكل</div>
                     <button class="add-btn" onclick="addToCart('شامبو', 20)">إضافة للسلة</button>
                 </div>
             </div>
@@ -254,7 +254,7 @@
                 total += item.price;
                 list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; background:#f9f9f9; padding:10px; border-radius:8px;">
                     <span>${item.name}</span>
-                    <span>${item.price} ريال <button onclick="remove(${index})" style="color:red; border:none; background:none; cursor:pointer;">✕</button></span>
+                    <span>${item.price} شيكل <button onclick="remove(${index})" style="color:red; border:none; background:none; cursor:pointer;">✕</button></span>
                 </div>`;
             });
             document.getElementById('total-val').innerText = total;
@@ -268,8 +268,8 @@
             const a = document.getElementById('uaddr').value;
             if(!n || !a || cart.length === 0) { alert("أكمل البيانات والسلة أولاً!"); return; }
             let msg = `*طلب جديد*\n👤 الاسم: ${n}\n📍 العنوان: ${a}\n----------\n`;
-            cart.forEach((it, i) => msg += `${i+1}. ${it.name} (${it.price} ريال)\n`);
-            msg += `----------\n💰 الإجمالي: ${document.getElementById('total-val').innerText} ريال`;
+            cart.forEach((it, i) => msg += `${i+1}. ${it.name} (${it.price} شيكل)\n`);
+            msg += `----------\n💰 الإجمالي: ${document.getElementById('total-val').innerText} شيكل`;
             window.open(`https://wa.me/970567113558?text=${encodeURIComponent(msg)}`);
         }
     </script>
