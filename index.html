@@ -618,44 +618,64 @@
         let cart = [];
 
         function addToCart(name, price, btn) {
-            const card = btn.closest('.card');
-            const qty = parseInt(card.querySelector('.qty-val').innerText);
-            for (let i = 0; i < qty; i++) cart.push({ name, price });
-            render();
-            btn.classList.add('added');
-            btn.innerText = '✅ تمت';
-            setTimeout(() => { btn.classList.remove('added'); btn.innerText = '🛒 أضف'; }, 1000);
-            showToast(`✅ تمت إضافة ${qty > 1 ? qty + 'x ' : ''}${name}`);
-        }
+    const card = btn.closest('.card');
+    const qtyToAdd = parseInt(card.querySelector('.qty-val').innerText);
+    
+    // البحث عن المنتج في السلة
+    const existingItem = cart.find(item => item.name === name);
+    
+    if (existingItem) {
+        // إذا وجدناه، نزيد الكمية فقط
+        existingItem.qty += qtyToAdd;
+    } else {
+        // إذا لم نجده، نضيفه كعنصر جديد مع خاصية qty
+        cart.push({ name, price, qty: qtyToAdd });
+    }
+    
+    render();
+    
+    // تأثير الزر الناجح
+    btn.classList.add('added');
+    btn.innerText = '✅ تمت';
+    setTimeout(() => { 
+        btn.classList.remove('added'); 
+        btn.innerText = '🛒 أضف'; 
+    }, 1000);
+    
+    showToast(`✅ تمت إضافة ${qtyToAdd} من ${name}`);
+}
 
-        function render() {
-            const list = document.getElementById('cart-list');
-            const emptyMsg = document.getElementById('empty-msg');
-            let total = 0;
+       function render() {
+    const list = document.getElementById('cart-list');
+    let total = 0;
+    let totalCount = 0;
 
-            if (cart.length === 0) {
-                list.innerHTML = '<div class="empty-cart"><div>🛍️</div><p>السلة فارغة، أضف منتجات أولاً</p></div>';
-            } else {
-                list.innerHTML = '';
-                cart.forEach((item, i) => {
-                    total += item.price;
-                    list.innerHTML += `
-                        <div class="cart-item">
-                            <div>
-                                <div class="cart-item-name">${item.name}</div>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:8px">
-                                <span class="cart-item-price">${item.price} ₪</span>
-                                <button class="cart-item-remove" onclick="removeItem(${i})">✕</button>
-                            </div>
-                        </div>`;
-                });
-            }
+    if (cart.length === 0) {
+        list.innerHTML = '<div class="empty-cart"><div>🛍️</div><p>السلة فارغة، أضف منتجات أولاً</p></div>';
+    } else {
+        list.innerHTML = '';
+        cart.forEach((item, i) => {
+            const itemTotal = item.price * item.qty;
+            total += itemTotal;
+            totalCount += item.qty;
+            
+            list.innerHTML += `
+                <div class="cart-item">
+                    <div>
+                        <div class="cart-item-name">${item.name} <span style="color: var(--gray-400)">× ${item.qty}</span></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <span class="cart-item-price">${itemTotal} ₪</span>
+                        <button class="cart-item-remove" onclick="removeItem(${i})">✕</button>
+                    </div>
+                </div>`;
+        });
+    }
 
-            document.getElementById('total-val').innerText = total + ' ₪';
-            document.getElementById('bottom-total').innerText = total + ' ₪';
-            document.getElementById('badge').innerText = cart.length;
-        }
+    document.getElementById('total-val').innerText = total + ' ₪';
+    document.getElementById('bottom-total').innerText = total + ' ₪';
+    document.getElementById('badge').innerText = totalCount;
+}
 
         function removeItem(i) { cart.splice(i, 1); render(); }
 
