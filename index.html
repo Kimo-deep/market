@@ -372,6 +372,14 @@
             .card img { max-height: 90px; }
             #cart-panel { width: 100%; left: -100%; }
         }
+        /* تنسيق المنتج المنتهي */
+.card.sold-out { opacity: 0.6; filter: grayscale(0.8); position: relative; }
+.card.sold-out .qty-ctrl { display: none; }
+.sold-out-badge {
+    position: absolute; top: 10px; right: 10px; background: #ef4444;
+    color: white; padding: 4px 10px; border-radius: 8px;
+    font-size: 0.75rem; font-weight: 700; z-index: 5;
+}
     </style>
 </head>
 <body>
@@ -524,7 +532,7 @@
                 <div class="section-line"></div>
             </div>
             <div class="grid">
-                <div class="card" data-name="شامبو">
+                <div class="card" data-name="شامبو" data-stock="0">
                     <button class="fav-btn" onclick="toggleFav(this)">🤍</button>
                     <div class="card-img-wrap">
                         <img src="https://m.media-amazon.com/images/I/61EUyReZ5tL._SX466_.jpg" alt="شامبو">
@@ -741,6 +749,34 @@
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 2200);
         }
+        function applySoldOutLogic() {
+    // نمر على كل البطاقات في الصفحة
+    document.querySelectorAll('.card').forEach(card => {
+        // نتحقق إذا كنت قد وضعت data-stock="0" يدوياً
+        const stock = card.getAttribute('data-stock');
+        
+        if (stock === "0") {
+            // إضافة الكلاس والشارة وتعطيل الزر تلقائياً
+            card.classList.add('sold-out');
+            
+            const badge = document.createElement('div');
+            badge.className = 'sold-out-badge';
+            badge.innerText = 'نفدت الكمية';
+            card.prepend(badge);
+            
+            const addBtn = card.querySelector('.add-btn');
+            if (addBtn) {
+                addBtn.disabled = true;
+                addBtn.innerText = '❌ غير متوفر';
+                addBtn.style.background = 'var(--gray-400)';
+                addBtn.style.cursor = 'not-allowed';
+            }
+        }
+    });
+}
+
+// تشغيل الدالة فور تحميل الصفحة
+window.addEventListener('DOMContentLoaded', applySoldOutLogic);
     </script>
 </body>
 </html>
